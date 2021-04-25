@@ -1,0 +1,14 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.col-center {
+    background-color: #55b296;
+}
+
+
+td , th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 200px;
+}

@@ -6,20 +6,49 @@
   <div class="col-left" fxFlex>
   </div>
 
-  <div class="col-center" fxFlex="66%">
+  <div class="col-center" fxFlex="grow">
     <mat-toolbar color="primary" class="mat-elevation-z3">{{ title }}
     <span class="spacer"></span>
-    <button mat-mini-fab color="accent" matTooltip="Add new RSS feed..."><mat-icon>add</mat-icon></button>
+    <button mat-mini-fab color="accent" matTooltip="Add new RSS feed..." (click)="openDialogRssFeed()"><mat-icon>add</mat-icon></button>
   </mat-toolbar>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z3">
+  
+      <!-- User name Definition -->
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef>RSS Feed</mat-header-cell>
+        <mat-cell *matCellDef="let row"> <a href="{{row.url}}">{{row.description}}</a> </mat-cell>
+      </ng-container>
+    
+      <!-- Age Definition -->
+      <!--
+      <ng-container matColumnDef="age">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+      </ng-container>
+      -->
+      <!-- Title Definition -->
+      <ng-container matColumnDef="enabled">
+        <mat-header-cell *matHeaderCellDef> Enabled </mat-header-cell>
+        <mat-cell *matCellDef="let row"> <mat-slide-toggle [checked]="row.isEnabled"></mat-slide-toggle> </mat-cell>
+      </ng-container>
+    
+      <!-- Options Definition -->
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row"> <mat-icon>more_vert</mat-icon></mat-cell>
+      </ng-container>
+    
+      
+      <!-- Header and Row Declarations -->
+      <mat-header-row *matHeaderRowDef="['username', 'enabled', 'options']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['username', 'enabled', 'options']"></mat-row>
+    </mat-table>
   </div>
-
   <div class="col-right" fxFlex>
   </div>
 
 </div>
-
-
-
+<!--
 <div class="container"  
      fxLayout
      fxLayoutAlign="center"
@@ -28,41 +57,9 @@
   <div class="col-left" fxFlex>
   </div>
 
-  <div class="col-center" fxFlex="66%">
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z3">
   
-      <!-- User name Definition -->
-      <ng-container matColumnDef="username">
-        <mat-header-cell *matHeaderCellDef>RSS Feed</mat-header-cell>
-        <mat-cell *matCellDef="let row"> <a href="{{row.url}}">HD-Olimpo - The Walking Dead</a> </mat-cell>
-      </ng-container>
-    
-      <!-- Age Definition -->
-      <ng-container matColumnDef="age">
-        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
-      </ng-container>
-    
-      <!-- Title Definition -->
-      <ng-container matColumnDef="title">
-        <mat-header-cell *matHeaderCellDef> Enabled </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <mat-slide-toggle [checked]="row.enabled"></mat-slide-toggle> </mat-cell>
-      </ng-container>
-    
-      <!-- Options Definition -->
-      <ng-container matColumnDef="options">
-        <mat-header-cell *matHeaderCellDef> Options </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <mat-icon>delete</mat-icon></mat-cell>
-      </ng-container>
-    
-      
-      <!-- Header and Row Declarations -->
-      <mat-header-row *matHeaderRowDef="['username', 'age', 'title', 'options']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['username', 'age', 'title', 'options']"></mat-row>
-    </mat-table>
-  </div>
 
   <div class="col-right" fxFlex>
   </div>
 
-</div>
+</div>-->

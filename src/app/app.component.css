@@ -12,3 +12,17 @@ td , th {
     word-wrap: break-word;
     max-width: 200px;
 }
+
+/* mat-table column styles */
+
+.mat-column-options {
+    text-align: right;
+    justify-content: flex-end;
+    flex: 0 0 8%;
+}
+
+.mat-column-enabled {
+    text-align: right;
+    justify-content: flex-end;
+    flex: 0 0 10%;
+}

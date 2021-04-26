@@ -20,7 +20,7 @@ export interface PeriodicElement {
 })
 export class AppComponent {
   
-  title = 'RSS Trackerr';
+  title = 'RSS Tracker';
 
   // Table datasource - Any element inside this will be used for filling the table
   dataSource: MatTableDataSource<RssFeed>;

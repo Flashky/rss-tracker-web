@@ -16,6 +16,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-feed.component';
 
@@ -39,7 +40,8 @@ import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-fee
     MatSlideToggleModule,
     MatButtonModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

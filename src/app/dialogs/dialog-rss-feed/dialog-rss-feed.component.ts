@@ -17,8 +17,9 @@ export class DialogRssFeedComponent implements OnInit {
   }
 
   isDisabled() {
-    return this.data.url = "";
+    return ((this.data.url == "") || (this.data.description == ""));
   }
+  
   
   getButtonColor() {
     return this.isDisabled() ? "" : "accent";

@@ -3,14 +3,14 @@
     <div mat-dialog-content>
         <div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
 
-            <mat-form-field required>
-                <mat-label>Fill form field</mat-label>
-                <input matInput [(ngModel)]="data.url" type="string" placeholder="Enter RSS feed url...">
+            <mat-form-field appearance="fill" required>
+                <mat-label>Enter RSS feed url</mat-label>
+                <input matInput [(ngModel)]="data.url" type="text" placeholder="Enter RSS feed url...">
                 <mat-icon matSuffix>link</mat-icon>
             </mat-form-field>
 
               
-            <mat-form-field>
+            <mat-form-field appearance="fill" required>
                 <input matInput [(ngModel)]="data.description" type="text" placeholder="Enter description...">
             </mat-form-field>
             

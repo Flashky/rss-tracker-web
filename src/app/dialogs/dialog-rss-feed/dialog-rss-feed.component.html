@@ -17,7 +17,7 @@
         </div>
     </div>
     <div mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="data" color="accent" [disabled]="validateFields()" cdkFocusInitial>Add</button>
+        <button mat-raised-button [mat-dialog-close]="data" [color]="getButtonColor()" [disabled]="isDisabled()" cdkFocusInitial>Add</button>
         <button mat-raised-button (click)="close()">Cancel</button>
     </div>
 </div>

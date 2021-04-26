@@ -16,10 +16,14 @@ export class DialogRssFeedComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  validateFields() {
-    return this.data.url == undefined;
+  isDisabled() {
+    return this.data.url = "";
   }
   
+  getButtonColor() {
+    return this.isDisabled() ? "" : "accent";
+  }
+
   close() {
     this.dialogRef.close();
   }

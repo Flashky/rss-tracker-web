@@ -16,6 +16,10 @@ export class DialogRssFeedComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  validateFields() {
+    return this.data.url == undefined;
+  }
+  
   close() {
     this.dialogRef.close();
   }

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-feed.component';
 import { RssFeed } from './rss-feed';
 
@@ -10,10 +11,6 @@ export interface PeriodicElement {
   enabled: boolean;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {url: "https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", description: 'The Walking Dead', enabled: false},
-  {url: "https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", description: 'The Walking Dead', enabled: true},
-];
 
 
 @Component({
@@ -23,26 +20,25 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AppComponent {
   
-  title = 'RSS Tracker';
+  title = 'RSS Trackerr';
 
   // Table datasource - Any element inside this will be used for filling the table
-  dataSource: RssFeed[] = [
-    new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "The Walking Dead", false),
-    new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "Rick & Morty", true)
-  ];
+  dataSource: MatTableDataSource<RssFeed>;
 
   // Slide toggle
   color: ThemePalette = 'primary';
-  isChecked = false;
 
-  // Table
+  // Table columns
   tableColumns: string[] = ['url', 'description', 'isEnabled'];
 
-  constructor(public dialog: MatDialog) { }
-  
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    //this.dataSource.filter = filterValue.trim().toLowerCase();
+  constructor(public dialog: MatDialog) { 
+
+    const rssFeeds: RssFeed[] = [
+      new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "The Walking Dead", false),
+      new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "Rick & Morty", true)
+    ];
+
+    this.dataSource = new MatTableDataSource(rssFeeds);
   }
 
   openDialogRssFeed() {
@@ -50,6 +46,18 @@ export class AppComponent {
       data: new RssFeed("", "", true),
       width: '500px'
     });
+
+    dialogo.afterClosed().subscribe(rssFeed => this.addRow(rssFeed));
   }
 
+  addRow(rssFeed: RssFeed) {
+    if (rssFeed != undefined){
+        
+      //https://stackblitz.com/edit/angular-material-addrow-example
+      this.dataSource.data.push(rssFeed);
+      this.dataSource.filter = ""; // Forces rendering the table again
+
+    }
+  }
+ 
 }

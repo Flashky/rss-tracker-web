@@ -38,6 +38,7 @@ import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-fee
     MatIconModule,
     MatSlideToggleModule,
     MatButtonModule,
+    MatIconModule,
     MatFormFieldModule
   ],
   providers: [],

@@ -10,6 +10,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
@@ -28,6 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     FlexLayoutModule,
     MatGridListModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatTableModule,
     MatIconModule,
     MatSlideToggleModule,

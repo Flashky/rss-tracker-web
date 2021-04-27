@@ -5,16 +5,19 @@
 
             <mat-form-field appearance="fill" required>
                 <mat-label>RSS feed url</mat-label>
-                <input matInput [(ngModel)]="data.url" type="text" placeholder="Enter RSS feed url...">
+                <input matInput [(ngModel)]="data.url" 
+                                type="text" 
+                                placeholder="Enter RSS feed url..." 
+                                (focusout)="checkUrl($event)"
+                                >
                 <mat-icon matSuffix>link</mat-icon>
             </mat-form-field>
-
               
             <mat-form-field appearance="fill" required>
                 <mat-label>Description</mat-label>
                 <input matInput [(ngModel)]="data.description" type="text" placeholder="Enter description...">
             </mat-form-field>
-            
+            <mat-spinner *ngIf="displaySpinner"></mat-spinner>
         </div>
     </div>
     <div mat-dialog-actions>

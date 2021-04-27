@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { HttpClientModule } from '@angular/common/http';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -15,11 +18,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
+import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+
 import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-feed.component';
 import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/dialog-delete-rss-feed.component';
 
@@ -35,10 +40,12 @@ import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/d
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     FlexLayoutModule,
     MatDialogModule,
     MatGridListModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,

@@ -31,20 +31,31 @@
       <!-- Title Definition -->
       <ng-container matColumnDef="enabled">
         <mat-header-cell *matHeaderCellDef> Enabled </mat-header-cell>
+        
         <mat-cell *matCellDef="let row"> <mat-slide-toggle [checked]="row.isEnabled"></mat-slide-toggle> </mat-cell>
       </ng-container>
     
       <!-- Options Definition -->
       <ng-container matColumnDef="options">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let row"> <mat-icon>more_vert</mat-icon></mat-cell>
+        <mat-header-cell *matHeaderCellDef> Options </mat-header-cell>
+        <mat-cell *matCellDef="let row"> 
+
+          <button mat-icon-button aria-label="Edit RSS feed" (click)="openDialogEditRssFeed(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button aria-label="Delete RSS feed">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </mat-cell>
       </ng-container>
-    
       
       <!-- Header and Row Declarations -->
       <mat-header-row *matHeaderRowDef="['rssFeed', 'enabled', 'options']"></mat-header-row>
       <mat-row *matRowDef="let row; columns: ['rssFeed', 'enabled', 'options']"></mat-row>
     </mat-table>
+
   </div>
   <div class="col-right">
   </div>

@@ -33,10 +33,25 @@ export class AppComponent {
 
   constructor(public dialog: MatDialog) { 
 
-    const rssFeeds: RssFeed[] = [
+    const rssFeeds: RssFeed[] = [/*
       new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "The Walking Dead", false),
-      new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "Rick & Morty", true)
+      new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "Rick & Morty", true)*/
     ];
+
+    var rssFeed: RssFeed = new RssFeed();
+    rssFeed.id = "1";
+    rssFeed.url = "https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44";
+    rssFeed.description = "The Walking Dead";
+    rssFeed.isEnabled = false;
+    rssFeeds.push(rssFeed);
+    console.log(rssFeed);
+
+    rssFeed= new RssFeed();
+    rssFeed.id = "2";
+    rssFeed.url = "https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44";
+    rssFeed.description = "Rick & Morty";
+    rssFeeds.push(rssFeed);
+    console.log(rssFeed);
 
     this.dataSource = new MatTableDataSource(rssFeeds);
   }
@@ -45,24 +60,70 @@ export class AppComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
+  openDialogEditRssFeed(rssFeed: RssFeed) {
+
+    const dialogo = this.dialog.open(DialogRssFeedComponent, {
+      data: new RssFeed(rssFeed), // Apply defensive copy to avoid modifying the real thing.
+      width: '500px'
+    });
+    
+    dialogo.afterClosed().subscribe(updatedRssFeed => this.updateRow(updatedRssFeed));
+
+  }
+
   openDialogRssFeed() {
     const dialogo = this.dialog.open(DialogRssFeedComponent, {
-      data: new RssFeed("", "", true),
+      data: new RssFeed(),
       width: '500px'
     });
 
     dialogo.afterClosed().subscribe(rssFeed => this.addRow(rssFeed));
   }
 
+  /**
+   * Adds a table row using the input RSS feed data.
+   * If no data is passed, nothing will be added.
+   * @param rssFeed The new RSS feed to add to the table.
+   */
   addRow(rssFeed: RssFeed) {
-    if (rssFeed != undefined){
+    
+    if (rssFeed){
         
       //https://stackblitz.com/edit/angular-material-addrow-example
       this.dataSource.data.push(rssFeed);
-      this.dataSource.filter = ""; // Forces rendering the table again
+      this.refreshTable();
 
     }
+
+  }
+ 
+  /**
+   * Updates a table row using the input RSS feed data.
+   * If no data is passed, nothing will be updated.
+   * @param updatedRssFeed The updated RSS feed to modify in the table.
+   */
+  updateRow(updatedRssFeed: RssFeed) {
+
+    if (updatedRssFeed){
+
+      var itemIndex = this.dataSource.data.findIndex(rssFeed => rssFeed.id == updatedRssFeed.id);
+      
+      // Update the item
+      if(itemIndex > -1) {
+
+        this.dataSource.data[itemIndex] = updatedRssFeed;
+        this.refreshTable();
+      }
+
+    }
+  }
+
+  /**
+   * Refreshes the mat-table content.
+   */
+  refreshTable() {
+    this.dataSource.filter = "";
   }
  
 }

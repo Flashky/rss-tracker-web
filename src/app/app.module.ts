@@ -10,6 +10,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
@@ -33,6 +34,7 @@ import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-fee
     FlexLayoutModule,
     MatDialogModule,
     MatGridListModule,
+    MatMenuModule,
     MatToolbarModule,
     MatTooltipModule,
     MatTableModule,

@@ -38,7 +38,7 @@ td , th {
 /* mat-table column styles */
 
 .mat-column-options {
-    text-align: right;
+    text-align: center;
     justify-content: flex-end;
     flex: 0 0 8%;
 }

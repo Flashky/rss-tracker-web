@@ -3,29 +3,31 @@
      fxLayoutAlign="center"
      fxLayoutGap.xs="0"
 >
-  <div class="col-left" fxFlex>
+  <div class="col-left">
   </div>
 
-  <div class="col-center" fxFlex="grow">
+  <div class="col-center">
+
     <mat-toolbar color="primary" class="mat-elevation-z3">{{ title }}
-    <span class="spacer"></span>
-    <button mat-mini-fab color="accent" matTooltip="Add new RSS feed..." (click)="openDialogRssFeed()"><mat-icon>add</mat-icon></button>
-  </mat-toolbar>
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z3">
+      <span class="spacer"></span>
+      <button mat-mini-fab color="accent" matTooltip="Add new RSS feed..." (click)="openDialogRssFeed()"><mat-icon>add</mat-icon></button>
+    </mat-toolbar>
+
+    <div class="filter">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. The Mandalorian" #input>
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="dataSource" matSortActive="rssFeed" class="mat-elevation-z3">
   
       <!-- User name Definition -->
-      <ng-container matColumnDef="username">
+      <ng-container matColumnDef="rssFeed">
         <mat-header-cell *matHeaderCellDef>RSS Feed</mat-header-cell>
         <mat-cell *matCellDef="let row"> <a href="{{row.url}}">{{row.description}}</a> </mat-cell>
       </ng-container>
     
-      <!-- Age Definition -->
-      <!--
-      <ng-container matColumnDef="age">
-        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
-      </ng-container>
-      -->
       <!-- Title Definition -->
       <ng-container matColumnDef="enabled">
         <mat-header-cell *matHeaderCellDef> Enabled </mat-header-cell>
@@ -40,26 +42,11 @@
     
       
       <!-- Header and Row Declarations -->
-      <mat-header-row *matHeaderRowDef="['username', 'enabled', 'options']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['username', 'enabled', 'options']"></mat-row>
+      <mat-header-row *matHeaderRowDef="['rssFeed', 'enabled', 'options']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['rssFeed', 'enabled', 'options']"></mat-row>
     </mat-table>
   </div>
-  <div class="col-right" fxFlex>
+  <div class="col-right">
   </div>
 
 </div>
-<!--
-<div class="container"  
-     fxLayout
-     fxLayoutAlign="center"
-     fxLayoutGap.xs="0"
->
-  <div class="col-left" fxFlex>
-  </div>
-
-  
-
-  <div class="col-right" fxFlex>
-  </div>
-
-</div>-->

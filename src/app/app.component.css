@@ -1,16 +1,38 @@
-.spacer {
-    flex: 1 1 auto;
+@media screen and (max-width: 1024px) {
+    
+    .col-center {
+        width: 100% !important;
+    }
+
+    .col-left, .col-right{
+      display: none;
+    }
+
+    .filter {
+        font-size: 14px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 
 .col-center {
-    background-color: #55b296;
+    width: 66%;
 }
 
+.spacer {
+    flex: 1 1 auto;
+}
 
 td , th {
     white-space: normal;
     word-wrap: break-word;
     max-width: 200px;
+}
+
+.mat-form-field {
+    margin-top: 10px;
+    font-size: 14px;
+    width: 100%;
 }
 
 /* mat-table column styles */

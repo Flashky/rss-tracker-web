@@ -1,18 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/dialog-delete-rss-feed.component';
 import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-feed.component';
 import { RssFeed } from './rss-feed';
-
-export interface PeriodicElement {
-  url: string;
-  description: String;
-  enabled: boolean;
-}
-
-
 
 @Component({
   selector: 'app-root',
@@ -32,7 +25,7 @@ export class AppComponent {
   // Table columns
   tableColumns: string[] = ['url', 'description', 'isEnabled'];
 
-  constructor(public dialog: MatDialog) { 
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar) { 
 
     const rssFeeds: RssFeed[] = [];
 
@@ -113,7 +106,7 @@ export class AppComponent {
       //https://stackblitz.com/edit/angular-material-addrow-example
       this.dataSource.data.push(rssFeed);
       this.refreshTable();
-
+      this.displayNotification("RSS feed added");
     }
 
   }
@@ -134,6 +127,7 @@ export class AppComponent {
 
         this.dataSource.data[itemIndex] = updatedRssFeed;
         this.refreshTable();
+        this.displayNotification("RSS feed updated");
       }
 
     }
@@ -156,6 +150,7 @@ export class AppComponent {
 
         this.dataSource.data.splice(itemIndex,1);
         this.refreshTable();
+        this.displayNotification("RSS feed deleted");
       }
 
     }
@@ -169,4 +164,8 @@ export class AppComponent {
     this.dataSource.filter = "";
   }
  
+  displayNotification(text: string) {
+
+    this.snackBar.open(text, "Close", { duration: 5000});
+  }
 }

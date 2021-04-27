@@ -21,22 +21,19 @@ export interface PeriodicElement {
 export class AppComponent {
   
   title = 'RSS Tracker';
-
-  // Table datasource - Any element inside this will be used for filling the table
-  dataSource: MatTableDataSource<RssFeed>;
-
+  
   // Slide toggle
   color: ThemePalette = 'primary';
 
+  // Table datasource - Any element inside this will be used for filling the table
+  dataSource: MatTableDataSource<RssFeed>;
+  
   // Table columns
   tableColumns: string[] = ['url', 'description', 'isEnabled'];
 
   constructor(public dialog: MatDialog) { 
 
-    const rssFeeds: RssFeed[] = [/*
-      new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "The Walking Dead", false),
-      new RssFeed("https://hd-olimpo.club/rss/1130.4ff22951d0562feb3b966d7e74172c44", "Rick & Morty", true)*/
-    ];
+    const rssFeeds: RssFeed[] = [];
 
     var rssFeed: RssFeed = new RssFeed();
     rssFeed.id = "1";

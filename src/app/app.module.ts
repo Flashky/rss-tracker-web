@@ -20,11 +20,13 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-feed.component';
+import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/dialog-delete-rss-feed.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogRssFeedComponent
+    DialogRssFeedComponent,
+    DialogDeleteRssFeedComponent
   ],
   imports: [
     BrowserModule,

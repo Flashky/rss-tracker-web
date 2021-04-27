@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/dialog-delete-rss-feed.component';
 import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-feed.component';
 import { RssFeed } from './rss-feed';
 
@@ -27,7 +28,7 @@ export class AppComponent {
 
   // Table datasource - Any element inside this will be used for filling the table
   dataSource: MatTableDataSource<RssFeed>;
-  
+
   // Table columns
   tableColumns: string[] = ['url', 'description', 'isEnabled'];
 
@@ -57,6 +58,15 @@ export class AppComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  openDialogDeleteRssFeed(rssFeed: RssFeed) {
+    const dialogo = this.dialog.open(DialogDeleteRssFeedComponent, {
+      width: '500px'
+    });
+
+    dialogo.afterClosed().subscribe(confirmedDeletion => { if(confirmedDeletion) this.removeRow(rssFeed) } );
+  }
+
 
   openDialogEditRssFeed(rssFeed: RssFeed) {
 
@@ -114,6 +124,25 @@ export class AppComponent {
       }
 
     }
+
+  }
+
+  
+  removeRow(rssFeed: RssFeed): void {
+    
+    if (rssFeed){
+
+      var itemIndex = this.dataSource.data.findIndex(rssFeedItem => rssFeedItem.id == rssFeed.id);
+      
+      // Remove the item
+      if(itemIndex > -1) {
+
+        this.dataSource.data.splice(itemIndex,1);
+        this.refreshTable();
+      }
+
+    }
+
   }
 
   /**

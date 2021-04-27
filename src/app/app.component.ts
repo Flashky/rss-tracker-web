@@ -59,15 +59,25 @@ export class AppComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  /**
+   * Opens a dialog to confirm the deletion of an existing RSS feed.
+   * After the dialog is closed, the RSS feed item will be deleted or not depending on the selection.
+   * @param rssFeed The RSS feed to remove.
+   */
   openDialogDeleteRssFeed(rssFeed: RssFeed) {
+    
     const dialogo = this.dialog.open(DialogDeleteRssFeedComponent, {
       width: '500px'
     });
 
-    dialogo.afterClosed().subscribe(confirmedDeletion => { if(confirmedDeletion) this.removeRow(rssFeed) } );
+    dialogo.afterClosed().subscribe(confirmedDeletion => { if(confirmedDeletion) this.removeRssFeed(rssFeed) } );
   }
 
-
+  /**
+   * Opens a dialog to update an existing RSS feed.
+   * After the dialog is closed, the RSS feed item will be updated at the table.
+   * @param rssFeed The RSS feed to update.
+   */
   openDialogEditRssFeed(rssFeed: RssFeed) {
 
     const dialogo = this.dialog.open(DialogRssFeedComponent, {
@@ -75,25 +85,29 @@ export class AppComponent {
       width: '500px'
     });
     
-    dialogo.afterClosed().subscribe(updatedRssFeed => this.updateRow(updatedRssFeed));
+    dialogo.afterClosed().subscribe(updatedRssFeed => this.updateRssFeed(updatedRssFeed));
 
   }
 
+  /**
+   * Opens a dialog to create a new RSS feed.
+   * After the dialog is closed, the RSS feed item will be created and added to the table.
+   */
   openDialogRssFeed() {
     const dialogo = this.dialog.open(DialogRssFeedComponent, {
       data: new RssFeed(),
       width: '500px'
     });
 
-    dialogo.afterClosed().subscribe(rssFeed => this.addRow(rssFeed));
+    dialogo.afterClosed().subscribe(rssFeed => this.addRssFeed(rssFeed));
   }
 
   /**
-   * Adds a table row using the input RSS feed data.
+   * Adds a new RSS feed.
    * If no data is passed, nothing will be added.
    * @param rssFeed The new RSS feed to add to the table.
    */
-  addRow(rssFeed: RssFeed) {
+  addRssFeed(rssFeed: RssFeed) {
     
     if (rssFeed){
         
@@ -106,11 +120,11 @@ export class AppComponent {
   }
  
   /**
-   * Updates a table row using the input RSS feed data.
+   * Updates an existing RSS feed.
    * If no data is passed, nothing will be updated.
    * @param updatedRssFeed The updated RSS feed to modify in the table.
    */
-  updateRow(updatedRssFeed: RssFeed) {
+  updateRssFeed(updatedRssFeed: RssFeed) {
 
     if (updatedRssFeed){
 
@@ -126,9 +140,13 @@ export class AppComponent {
     }
 
   }
-
   
-  removeRow(rssFeed: RssFeed): void {
+  /**
+   * Removes a RSS feed.
+   * If no data is passed nothing will be removed.
+   * @param rssFeed The RSS feed to remove from the table.
+   */
+  removeRssFeed(rssFeed: RssFeed): void {
     
     if (rssFeed){
 

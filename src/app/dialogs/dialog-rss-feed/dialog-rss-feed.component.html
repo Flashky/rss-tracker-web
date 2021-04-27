@@ -1,23 +1,24 @@
 <div>
-    <h1 mat-dialog-title>Add new RSS feed</h1>
+    <h1 mat-dialog-title>{{ title }}</h1>
     <div mat-dialog-content>
         <div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
 
             <mat-form-field appearance="fill" required>
-                <mat-label>Enter RSS feed url</mat-label>
+                <mat-label>RSS feed url</mat-label>
                 <input matInput [(ngModel)]="data.url" type="text" placeholder="Enter RSS feed url...">
                 <mat-icon matSuffix>link</mat-icon>
             </mat-form-field>
 
               
             <mat-form-field appearance="fill" required>
+                <mat-label>Description</mat-label>
                 <input matInput [(ngModel)]="data.description" type="text" placeholder="Enter description...">
             </mat-form-field>
             
         </div>
     </div>
     <div mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="data" [color]="getButtonColor()" [disabled]="isDisabled()" cdkFocusInitial>Add</button>
+        <button mat-raised-button [mat-dialog-close]="data" [color]="getButtonColor()" [disabled]="isDisabled()">{{ confirmationButtonText }}</button>
         <button mat-raised-button (click)="close()">Cancel</button>
     </div>
 </div>

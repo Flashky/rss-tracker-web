@@ -65,7 +65,7 @@ export class AppComponent {
    * @param rssFeed The RSS feed to remove.
    */
   openDialogDeleteRssFeed(rssFeed: RssFeed) {
-    
+
     const dialogo = this.dialog.open(DialogDeleteRssFeedComponent, {
       width: '500px'
     });
@@ -95,7 +95,6 @@ export class AppComponent {
    */
   openDialogRssFeed() {
     const dialogo = this.dialog.open(DialogRssFeedComponent, {
-      data: new RssFeed(),
       width: '500px'
     });
 

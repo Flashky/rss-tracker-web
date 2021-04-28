@@ -17,7 +17,7 @@ export class RssValidationService {
    */
   validate(rssFeedUrl: string): Observable<boolean> {
     
-    const observableValidation = new Observable<boolean>( (observer) => {
+    return new Observable<boolean>( (observer) => {
 
       // Proxy inverse - Real validatorUrl: "http://validator.w3.org/feed/check.cgi"
       const validatorUrl = '/validate';
@@ -39,12 +39,9 @@ export class RssValidationService {
                   // Once validation service has replied, parse its response and pass it to the observer 
                   observer.next(this.parseXmlResponse(response)); 
                   observer.complete();
-
                 });
                 
     });
-
-    return observableValidation;
 
   }
 
@@ -61,7 +58,7 @@ export class RssValidationService {
     var isRssValid: boolean = false;
     parser.parseString(response.toString(),  (err: any, result: any) => {
       if(!err) {
-        isRssValid = result["ENV:ENVELOPE"]["ENV:BODY"][0]["M:FEEDVALIDATIONRESPONSE"][0]["M:VALIDITY"][0];
+        isRssValid = JSON.parse(result["ENV:ENVELOPE"]["ENV:BODY"][0]["M:FEEDVALIDATIONRESPONSE"][0]["M:VALIDITY"][0]);
       }
     });
     

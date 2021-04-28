@@ -66,7 +66,7 @@ export class DialogRssFeedComponent implements OnInit {
     // Start displaying the spinner
     this.displaySpinner = true;
     this.rssValidationService.validate(url)
-                              .subscribe( result => {
+                              .subscribe( (result: boolean) => {
                                 this.isRssValid = result;
                               })
                               .add(() => {

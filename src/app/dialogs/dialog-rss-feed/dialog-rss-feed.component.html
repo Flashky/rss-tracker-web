@@ -18,11 +18,12 @@
                 <mat-label>Description</mat-label>
                 <input matInput [(ngModel)]="data.description" type="text" placeholder="Enter description...">
             </mat-form-field>
-            <mat-spinner *ngIf="displaySpinner"></mat-spinner>
+           
         </div>
     </div>
+    <!-- <mat-icon *ngIf="displaySpinner"><mat-spinner diameter="20"></mat-spinner></mat-icon> -->
     <div mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="data" [color]="getButtonColor()" [disabled]="isDisabled()">{{ confirmationButtonText }}</button>
+        <button mat-raised-button [mat-dialog-close]="data" [color]="getButtonColor()" [disabled]="isDisabled()">{{ confirmationButtonText }} </button>
         <button mat-raised-button (click)="close()">Cancel</button>
     </div>
 </div>

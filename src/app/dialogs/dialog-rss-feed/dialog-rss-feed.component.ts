@@ -20,7 +20,7 @@ export class DialogRssFeedComponent implements OnInit {
   // Flags
   displaySpinner: boolean = false;
   isRssValid: boolean = true;
-  hasModification: boolean = false;
+  urlHasChanged: boolean = false;
 
   // FormControls
   urlControl = new FormControl('');
@@ -54,7 +54,7 @@ export class DialogRssFeedComponent implements OnInit {
     
     const url = (event.target as HTMLInputElement).value;
 
-    if(this.hasModification) {
+    if(this.urlHasChanged) {
       //this.getRssFeed(url);
       this.validateRssFeed(url);
     }
@@ -65,6 +65,7 @@ export class DialogRssFeedComponent implements OnInit {
 
     // Start displaying the spinner
     this.displaySpinner = true;
+    this.isRssValid = false;
     this.rssValidationService.validate(url)
                               .subscribe( (result: boolean) => {
                                 this.isRssValid = result;
@@ -73,14 +74,15 @@ export class DialogRssFeedComponent implements OnInit {
 
                                 // Stop spinner animation
                                 this.displaySpinner = false;
-                                this.hasModification = false;
+                                this.urlHasChanged = false;
+                                
                                 console.log(this.isRssValid);
                               });
 
   }
 
   urlModified() {
-    this.hasModification = true;
+    this.urlHasChanged = true;
   }
 
   isDisabled() {
@@ -93,7 +95,15 @@ export class DialogRssFeedComponent implements OnInit {
   }
 
   close() {
-    this.dialogRef.close();
+
+    if(this.urlHasChanged) {
+      this.validateRssFeed(this.data.url);
+    }
+
+    if(this.isRssValid) {
+      this.dialogRef.close();
+    }
+  
   }
 
 }

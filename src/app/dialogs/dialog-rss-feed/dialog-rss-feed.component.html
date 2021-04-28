@@ -9,6 +9,7 @@
                                 type="text" 
                                 placeholder="Enter RSS feed url..." 
                                 (focusout)="checkUrl($event)"
+                                (keyup)="urlModified()"
                                 >
                 <mat-icon matSuffix>link</mat-icon>
             </mat-form-field>

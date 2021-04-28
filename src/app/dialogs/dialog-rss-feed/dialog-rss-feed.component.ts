@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, throwMatDialogContentAlreadyAttachedError} from '@angular/material/dialog';
 import { RssFeed } from 'src/app/rss-feed';
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import {Parser} from 'xml2js';
+import { RssValidationService } from 'src/app/services/rss-validation.service';
 
 @Component({
   selector: 'app-dialog-rss-feed',
@@ -11,17 +13,22 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class DialogRssFeedComponent implements OnInit {
 
+  // Dialog text labels
   title: string = "";
   confirmationButtonText: string = "";
+
+  // Flags
   displaySpinner: boolean = false;
-  isValidUrl: boolean = true;
-   
+  isRssValid: boolean = true;
+  hasModification: boolean = false;
+
   // FormControls
   urlControl = new FormControl('');
 
   constructor(public dialogRef: MatDialogRef<DialogRssFeedComponent>, 
                 @Inject(MAT_DIALOG_DATA) public data: RssFeed,
-                private http: HttpClient) {}
+                private http: HttpClient,
+                private rssValidationService: RssValidationService) {}
 
   ngOnInit(): void {
     
@@ -47,41 +54,37 @@ export class DialogRssFeedComponent implements OnInit {
     
     const url = (event.target as HTMLInputElement).value;
 
-    this.getRssFeed(url);
-      
+    if(this.hasModification) {
+      //this.getRssFeed(url);
+      this.validateRssFeed(url);
+    }
   }
 
-  getRssFeed(url: string) {
-    
-    const requestOptions: Object = {
-      responseType: "text"
-    };
+  // TODO todo esto se metería en un servicio aparte para realizar las validaciones
+  validateRssFeed(url: string) {
 
+    // Start displaying the spinner
     this.displaySpinner = true;
+    this.rssValidationService.validate(url)
+                              .subscribe( result => {
+                                this.isRssValid = result;
+                              })
+                              .add(() => {
 
-    this.http.get(url, requestOptions)
-              .subscribe( 
-                  // Log the result or error
-                  response => { console.log(response); this.isValidUrl = true },
-                  error => { 
-                    const httpError: HttpErrorResponse = error;
-                    
-                    if(httpError.status == 404) {
-                      console.log("Not found");
-                    }
+                                // Stop spinner animation
+                                this.displaySpinner = false;
+                                this.hasModification = false;
+                                console.log(this.isRssValid);
+                              });
 
-                    console.log(error); 
-                    this.isValidUrl = false;
-                  }
-                ).add(() => {
-                  this.displaySpinner = false;
-                  console.log(this.isValidUrl);
-                  this.urlControl.markAsTouched();
-             });
+  }
+
+  urlModified() {
+    this.hasModification = true;
   }
 
   isDisabled() {
-    return ((this.data.url == "") || (this.data.description == ""));
+    return ((this.data.url == "") || (this.data.description == "") || (!this.isRssValid));
   }
   
   

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, throwMatDialogContentAlreadyAttachedError} from '@angular/material/dialog';
 import { RssFeed } from 'src/app/rss-feed';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Parser} from 'xml2js';
 import { RssValidationService } from 'src/app/services/rss-validation.service';
 
@@ -23,7 +23,13 @@ export class DialogRssFeedComponent implements OnInit {
   urlHasChanged: boolean = false;
 
   // FormControls
-  urlControl = new FormControl('');
+  urlFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  descriptionFormControl = new FormControl('', [
+    Validators.required
+  ]);
 
   constructor(public dialogRef: MatDialogRef<DialogRssFeedComponent>, 
                 @Inject(MAT_DIALOG_DATA) public data: RssFeed,

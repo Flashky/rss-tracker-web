@@ -3,20 +3,20 @@
     <div mat-dialog-content>
         <div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
 
-            <mat-form-field appearance="fill" required>
+            <mat-form-field appearance="fill">
                 <mat-label>RSS feed url</mat-label>
                 <input matInput [(ngModel)]="data.url" 
                                 type="text" 
-                                placeholder="Enter RSS feed url..." 
+                                placeholder="Enter RSS feed url" 
                                 (focusout)="checkUrl($event)"
                                 (keyup)="urlModified()"
-                                >
+                                required>
                 <mat-icon matSuffix>link</mat-icon>
             </mat-form-field>
               
             <mat-form-field appearance="fill" required>
                 <mat-label>Description</mat-label>
-                <input matInput [(ngModel)]="data.description" type="text" placeholder="Enter description...">
+                <input matInput [(ngModel)]="data.description" type="text" placeholder="Enter description" required>
             </mat-form-field>
            
         </div>

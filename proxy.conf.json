@@ -1,6 +1,6 @@
 {
-    "/*": {
-      "target": "https://hd-olimpo.club/rss",
+    "/validate": {
+      "target": "http://validator.w3.org/feed/check.cgi",
       "secure": true,
       "logLevel": "debug",
       "changeOrigin": true

@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, throwMatDialogContentAlreadyAttachedError} from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RssFeed } from 'src/app/rss-feed';
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Parser} from 'xml2js';
+import { FormControl, Validators } from '@angular/forms';
 import { RssValidationService } from 'src/app/services/rss-validation.service';
 
 @Component({
@@ -33,7 +31,6 @@ export class DialogRssFeedComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogRssFeedComponent>, 
                 @Inject(MAT_DIALOG_DATA) public data: RssFeed,
-                private http: HttpClient,
                 private rssValidationService: RssValidationService) {}
 
   ngOnInit(): void {

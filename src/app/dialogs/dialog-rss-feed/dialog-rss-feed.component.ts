@@ -34,8 +34,6 @@ export class DialogRssFeedComponent implements OnInit {
                 private rssValidationService: RssValidationService) {}
 
   ngOnInit(): void {
-    
-    console.log(this.data);
 
     if(this.data) {
 
@@ -97,16 +95,8 @@ export class DialogRssFeedComponent implements OnInit {
     return this.isDisabled() ? "" : "accent";
   }
 
-  close() {
-
-    if(this.urlHasChanged) {
-      this.validateRssFeed(this.data.url);
-    }
-
-    if(this.isRssValid) {
-      this.dialogRef.close();
-    }
-  
+  cancel() {
+    this.dialogRef.close();
   }
 
 }

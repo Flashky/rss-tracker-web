@@ -32,7 +32,7 @@
       <ng-container matColumnDef="enabled">
         <mat-header-cell *matHeaderCellDef> Enabled </mat-header-cell>
         
-        <mat-cell *matCellDef="let row"> <mat-slide-toggle [checked]="row.isEnabled"></mat-slide-toggle> </mat-cell>
+        <mat-cell *matCellDef="let row"> <mat-slide-toggle [checked]="row.isEnabled" [(ngModel)]="row.isEnabled"></mat-slide-toggle> </mat-cell>
       </ng-container>
     
       <!-- Options column efinition -->

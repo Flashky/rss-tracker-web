@@ -1,43 +1,56 @@
 <div>
     <h1 mat-dialog-title>{{ title }}</h1>
+    
     <div mat-dialog-content>
-        <div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
+        
+        <form style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;" [formGroup]="rssFeed">
 
+            <!-- RSS feed URL -->
             <mat-form-field appearance="fill" class="url">
+
                 <mat-label>RSS feed url</mat-label>
-                <input matInput [(ngModel)]="data.url" 
-                                [formControl]="urlFormControl"
+                <input matInput formControlName="url"
                                 type="text" 
                                 placeholder="Enter RSS feed url" 
                                 required>
                 <mat-icon matSuffix>link</mat-icon>
 
-                <mat-error *ngIf="urlFormControl.hasError('required')">
+                <mat-error *ngIf="rssFeed.controls.url.hasError('required')">
                     This field is required
                 </mat-error>
-                <mat-error *ngIf="urlFormControl.hasError('invalidRss')">
+                <mat-error *ngIf="rssFeed.controls.url.hasError('invalidRss')">
                     Invalid RSS feed
                 </mat-error>
-                
+
             </mat-form-field>
               
+            <!-- RSS feed description -->
             <mat-form-field appearance="fill" required>
+
                 <mat-label>Description</mat-label>
-                <input matInput [(ngModel)]="data.description" 
-                                [formControl]="descriptionFormControl"
+                <input matInput formControlName="description"
                                 type="text" 
                                 placeholder="Enter description" 
                                 required>
-                <mat-error *ngIf="descriptionFormControl.hasError('required')">
+
+                <mat-error *ngIf="rssFeed.controls.description.hasError('required')">
                     This field is required
                 </mat-error>
+
             </mat-form-field>
-           
-        </div>
+
+            <!-- <mat-icon *ngIf="displaySpinner"><mat-spinner diameter="20"></mat-spinner></mat-icon> -->
+            <!-- Dialog buttons -->
+            <div mat-dialog-actions>
+                <button mat-raised-button type="submit" [mat-dialog-close]="data" 
+                                                        (click)="onSubmit()" 
+                                                        [color]="getSubmitButtonColor()" 
+                                                        [disabled]="!rssFeed.valid">
+                                                        {{ submitText }} 
+                </button>
+                <button mat-raised-button (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
     </div>
-    <!-- <mat-icon *ngIf="displaySpinner"><mat-spinner diameter="20"></mat-spinner></mat-icon> -->
-    <div mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="data" [color]="getButtonColor()" [disabled]="isDisabled()">{{ confirmationButtonText }} </button>
-        <button mat-raised-button (click)="cancel()">Cancel</button>
-    </div>
+
 </div>

@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RssFeed } from 'src/app/rss-feed';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RssValidationService } from 'src/app/services/rss-validation.service';
+import { RssFeedValidator } from 'src/app/validators/rss-feed-validator';
 
 @Component({
   selector: 'app-dialog-rss-feed',
@@ -17,17 +18,26 @@ export class DialogRssFeedComponent implements OnInit {
 
   // Flags
   displaySpinner: boolean = false;
-  isRssValid: boolean = true;
-  urlHasChanged: boolean = false;
 
-  // FormControls
-  urlFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  // FormGroup and form controls:
+  rssFeedFormGroup: FormGroup = new FormGroup({
 
-  descriptionFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  });
+
+
+  // FormControls - https://fiyazhasan.me/asynchronous-validation-in-angulars-reactive-forms-control/
+
+  urlFormControl = new FormControl('', {
+    validators: [ Validators.required ],                              
+    asyncValidators: [ RssFeedValidator.valid(this.rssValidationService) ],
+    updateOn: 'blur' // Update only when focus change to avoid validation spamming on an incomplete url
+  }
+  
+  );
+
+  descriptionFormControl = new FormControl('',  {
+    validators: [ Validators.required ]
+  });
 
   constructor(public dialogRef: MatDialogRef<DialogRssFeedComponent>, 
                 @Inject(MAT_DIALOG_DATA) public data: RssFeed,
@@ -50,44 +60,9 @@ export class DialogRssFeedComponent implements OnInit {
     }
     
   }
-  
-  checkUrl(event: Event) {
-    
-    const url = (event.target as HTMLInputElement).value;
-
-    if(this.urlHasChanged) {
-      //this.getRssFeed(url);
-      this.validateRssFeed(url);
-    }
-  }
-
-  // TODO todo esto se metería en un servicio aparte para realizar las validaciones
-  validateRssFeed(url: string) {
-
-    // Start displaying the spinner
-    this.displaySpinner = true;
-    this.isRssValid = false;
-    this.rssValidationService.validate(url)
-                              .subscribe( (result: boolean) => {
-                                this.isRssValid = result;
-                              })
-                              .add(() => {
-
-                                // Stop spinner animation
-                                this.displaySpinner = false;
-                                this.urlHasChanged = false;
-                                
-                                console.log(this.isRssValid);
-                              });
-
-  }
-
-  urlModified() {
-    this.urlHasChanged = true;
-  }
 
   isDisabled() {
-    return ((this.data.url == "") || (this.data.description == "") || (!this.isRssValid));
+    return ((this.data.url == "") || (this.data.description == ""));
   }
   
   

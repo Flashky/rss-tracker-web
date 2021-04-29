@@ -9,13 +9,16 @@
                                 [formControl]="urlFormControl"
                                 type="text" 
                                 placeholder="Enter RSS feed url" 
-                                (focusout)="checkUrl($event)"
-                                (keyup)="urlModified()"
                                 required>
                 <mat-icon matSuffix>link</mat-icon>
+
                 <mat-error *ngIf="urlFormControl.hasError('required')">
                     This field is required
                 </mat-error>
+                <mat-error *ngIf="urlFormControl.hasError('invalidRss')">
+                    Invalid RSS feed
+                </mat-error>
+                
             </mat-form-field>
               
             <mat-form-field appearance="fill" required>

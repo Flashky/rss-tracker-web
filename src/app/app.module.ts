@@ -58,7 +58,11 @@ import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/d
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [ 
+    { 
+      provide: Window, 
+      useValue: window 
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

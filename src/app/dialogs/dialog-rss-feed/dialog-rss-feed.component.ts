@@ -28,7 +28,10 @@ export class DialogRssFeedComponent implements OnInit {
       validators: [ Validators.required ], 
       //asyncValidators: [ RssFeedValidator.valid(this.rssValidationService) ], // CORS problem
       updateOn: 'blur' 
-    }]
+    }],
+    
+    // Description FormControl
+    description: [this.data?.description,]
 
   });
 

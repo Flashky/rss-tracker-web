@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { RssFeed } from 'src/app/rss-feed';
+import { RssFeed } from 'src/app/model/feed/rss-feed';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RssValidationService } from 'src/app/services/rss-validation.service';
 import { RssFeedValidator } from 'src/app/validators/rss-feed-validator';

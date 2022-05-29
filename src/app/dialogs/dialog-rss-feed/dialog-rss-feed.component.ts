@@ -38,7 +38,8 @@ export class DialogRssFeedComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogRssFeedComponent>, 
                 @Inject(MAT_DIALOG_DATA) public data: RssFeed = new RssFeed(),
                 private formBuilder: FormBuilder,
-                private rssValidationService: RssValidationService) {
+                private rssValidationService: RssValidationService,
+                private window: Window) {
 
 
   }
@@ -59,6 +60,7 @@ export class DialogRssFeedComponent implements OnInit {
       this.submitText = "Add";
     }
     
+    console.log(window);
   }
   
   getSubmitButtonColor() {

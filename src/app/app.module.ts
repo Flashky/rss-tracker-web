@@ -27,6 +27,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { DialogRssFeedComponent } from './dialogs/dialog-rss-feed/dialog-rss-feed.component';
 import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/dialog-delete-rss-feed.component';
+import { TelegramWindow } from './model/telegram/telegram-window';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/d
   ],
   providers: [ 
     { 
-      provide: Window, 
+      provide: TelegramWindow, 
       useValue: window 
     }],
   bootstrap: [AppComponent]

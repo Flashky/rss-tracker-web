@@ -4,6 +4,7 @@ import { RssFeed } from 'src/app/rss-feed';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RssValidationService } from 'src/app/services/rss-validation.service';
 import { RssFeedValidator } from 'src/app/validators/rss-feed-validator';
+import { TelegramWindow } from 'src/app/model/telegram/telegram-window';
 
 @Component({
   selector: 'app-dialog-rss-feed',
@@ -39,7 +40,7 @@ export class DialogRssFeedComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) public data: RssFeed = new RssFeed(),
                 private formBuilder: FormBuilder,
                 private rssValidationService: RssValidationService,
-                private window: Window) {
+                private window: TelegramWindow) {
 
 
   }
@@ -60,7 +61,7 @@ export class DialogRssFeedComponent implements OnInit {
       this.submitText = "Add";
     }
     
-    console.log(window);
+    console.log(this.window.Telegram.WebApp);
   }
   
   getSubmitButtonColor() {

@@ -26,13 +26,8 @@ export class DialogRssFeedComponent implements OnInit {
     // URL FormControl
     url: [this.data?.url, { 
       validators: [ Validators.required ], 
-      asyncValidators: [ RssFeedValidator.valid(this.rssValidationService) ], 
+      //asyncValidators: [ RssFeedValidator.valid(this.rssValidationService) ], // CORS problem
       updateOn: 'blur' 
-    }],
-
-    // Description FormControl
-    description: [this.data?.description, { 
-      validators: [ Validators.required ]
     }]
 
   });
@@ -71,7 +66,7 @@ export class DialogRssFeedComponent implements OnInit {
     
     // Update result data 
     this.data.url = this.rssFeed.controls.url.value;
-    this.data.description = this.rssFeed.controls.description.value;
+    this.data.description = this.rssFeed.controls.description?.value;
 
     // TODO perform API POST or PATCH here.
     // TODO return the resource URI instead of the data itself.

@@ -4,15 +4,14 @@
         width: 100% !important;
     }
 
-    .col-left, .col-right{
-      display: none;
-    }
-
     .filter {
+        width: 100% !important;
         font-size: 14px;
+        margin-top: 10px;
         padding-left: 10px;
         padding-right: 10px;
     }
+
 }
 
 .col-center {
@@ -21,30 +20,4 @@
 
 .spacer {
     flex: 1 1 auto;
-}
-
-td , th {
-    white-space: normal;
-    word-wrap: break-word;
-    max-width: 200px;
-}
-
-.mat-form-field {
-    margin-top: 10px;
-    font-size: 14px;
-    width: 100%;
-}
-
-/* mat-table column styles */
-
-.mat-column-options {
-    text-align: center;
-    justify-content: flex-end;
-    flex: 0 0 8%;
-}
-
-.mat-column-enabled {
-    text-align: right;
-    justify-content: flex-end;
-    flex: 0 0 10%;
 }

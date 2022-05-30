@@ -56,7 +56,7 @@ export class DialogRssFeedComponent implements OnInit {
 
       // Dialog opened in creation mode
       this.data = new RssFeed();
-      this.title = "Add new RSS feed";
+      this.title = "New RSS feed";
       this.submitText = "Add";
     }
     

@@ -3,61 +3,26 @@
      fxLayoutAlign="center"
      fxLayoutGap.xs="0"
 >
-  <div class="col-left">
-  </div>
-
   <div class="col-center">
 
-    <mat-toolbar color="primary" class="mat-elevation-z3">{{ title }}
+    <mat-toolbar color="primary" class="mat-elevation-z3">
+      <!--
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      -->
+      <span>{{ title }}</span>
       <span class="spacer"></span>
-      <button mat-mini-fab color="accent" matTooltip="Add new RSS feed..." (click)="openDialogRssFeed()"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="accent" matTooltip="New RSS feed..." (click)="openDialogRssFeed()"><mat-icon>add</mat-icon></button>
     </mat-toolbar>
 
-    <div class="filter">
-      <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. The Mandalorian" #input>
-      </mat-form-field>
-    </div>
+    <mat-list>
+      <mat-list-item> HD-Olimpo: The Walking Dead </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item> HD-Olimpo: Rick & Morty </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
 
-    <mat-table [dataSource]="dataSource" matSortActive="rssFeed" class="mat-elevation-z3">
-  
-      <!-- RSS Feed column definition -->
-      <ng-container matColumnDef="rssFeed">
-        <mat-header-cell *matHeaderCellDef>RSS Feed</mat-header-cell>
-        <mat-cell *matCellDef="let row"> <a href="{{row.url}}">{{row.description}}</a> </mat-cell>
-      </ng-container>
-    
-      <!-- Enabled status column definition -->
-      <ng-container matColumnDef="enabled">
-        <mat-header-cell *matHeaderCellDef> Enabled </mat-header-cell>
-        
-        <mat-cell *matCellDef="let row"> <mat-slide-toggle [checked]="row.isEnabled" [(ngModel)]="row.isEnabled"></mat-slide-toggle> </mat-cell>
-      </ng-container>
-    
-      <!-- Options column efinition -->
-      <ng-container matColumnDef="options">
-        <mat-header-cell *matHeaderCellDef> Options </mat-header-cell>
-        <mat-cell *matCellDef="let row"> 
-
-          <button mat-icon-button aria-label="Edit RSS feed"  matTooltip="Edit RSS feed" (click)="openDialogEditRssFeed(row)">
-            <mat-icon>edit</mat-icon>
-          </button>
-
-          <button mat-icon-button aria-label="Delete RSS feed" matTooltip="Delete RSS feed" (click)="openDialogDeleteRssFeed(row)">
-            <mat-icon>delete</mat-icon>
-          </button>
-
-        </mat-cell>
-      </ng-container>
-      
-      <!-- Header and Row Declarations -->
-      <mat-header-row *matHeaderRowDef="['rssFeed', 'enabled', 'options']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['rssFeed', 'enabled', 'options']"></mat-row>
-    </mat-table>
-
-  </div>
-  <div class="col-right">
   </div>
 
 </div>

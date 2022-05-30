@@ -18,6 +18,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
@@ -45,6 +46,7 @@ import { DialogDeleteRssFeedComponent } from './dialogs/dialog-delete-rss-feed/d
     FlexLayoutModule,
     MatDialogModule,
     MatGridListModule,
+    MatListModule,
     MatMenuModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
